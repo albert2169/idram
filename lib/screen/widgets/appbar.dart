@@ -11,37 +11,36 @@ class IdramAppbar extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color(0xFF444444),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: Icon(
-                      Icons.person,
-                      size: 18,
-                      color: Color(0xFF444444),
-                    ),
-                  ),
+            CircleAvatar(
+              radius: 24,
+              backgroundColor: Colors.transparent,
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/images/codify_pix_logo.png',
+                  width: 48,
+                  height: 48,
+                  fit: BoxFit.cover, // or BoxFit.contain
                 ),
               ),
             ),
+
             const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'CodifyPix',
-                  style: TextStyle(color: Color(0xFF000000), fontSize: 18),
+                Row(
+                  children: [
+                    Text(
+                      'Codify',
+                      style: TextStyle(color: Color(0xFF141850), fontSize: 18),
+                    ),
+                    Text(
+                      'Pix',
+                      style: TextStyle(color: Color(0xFF52D5C8), fontSize: 18),
+                    ),
+                  ],
                 ),
+
                 Text(
                   'Նույնականանալ IDBank-ում',
                   style: TextStyle(

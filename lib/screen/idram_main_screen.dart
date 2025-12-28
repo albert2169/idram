@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:idram/screen/constants/idram_constants.dart';
+import 'package:idram/screen/scanner_screen.dart';
 import 'package:idram/screen/widgets/appbar.dart';
 import 'package:idram/screen/widgets/bottom_navigation_bar.dart';
 import 'package:idram/screen/widgets/images_card.dart';
@@ -105,7 +106,16 @@ class _IdramMainScreenState extends State<IdramMainScreen>
           backgroundColor: const Color(0xFFFF6B1A),
           elevation: 4,
           shape: const CircleBorder(),
-          onPressed: () {},
+          onPressed: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ScannerScreen()),
+            );
+
+            if (result != null) {
+              print('Scanned: $result');
+            }
+          },
           child: Icon(
             IdramConstants.bottomNavigationBar[2].iconData,
             color: Colors.white,
