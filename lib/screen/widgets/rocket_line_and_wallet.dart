@@ -52,7 +52,7 @@ class RocketLineAndWallet extends StatelessWidget {
               ),
             ),
             const Positioned(
-              left: 15,
+              left: 5,
               top: 30,
               child: Text(
                 '10,000,000.00 AMD',
@@ -119,7 +119,7 @@ class RocketLineAndWallet extends StatelessWidget {
               left: 15,
               top: 30,
               child: Text(
-                '660,000.43 AMD',
+                '660,000.43 EUR',
                 style: TextStyle(
                   color: Color(0xFF1C1C1C),
                   fontWeight: FontWeight.w600,

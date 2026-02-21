@@ -19,7 +19,7 @@ class IdramAppbar extends StatelessWidget implements PreferredSizeWidget {
                   'assets/images/codify_pix_logo.png',
                   width: 48,
                   height: 48,
-                  fit: BoxFit.cover, // or BoxFit.contain
+                  fit: BoxFit.cover, 
                 ),
               ),
             ),
@@ -94,5 +94,5 @@ class IdramAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight + 20);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

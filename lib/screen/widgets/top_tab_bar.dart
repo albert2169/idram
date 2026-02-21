@@ -63,21 +63,6 @@ class TopTabBar extends StatelessWidget {
             );
           }),
         ),
-        if (!isAboutStories)
-          Center(
-            child: GestureDetector(
-              onTap: () {
-                //Implement by yourself // Recommended to provide Function on tap as a callback from idram main screen
-              },
-              child: Text(
-                'Բոլորը',
-                style: TextStyle(
-                  color: Color(0xFF141414),
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-          ),
       ],
     );
   }

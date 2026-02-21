@@ -23,7 +23,6 @@ class IdramBottomNavigationBar extends StatelessWidget {
       elevation: 10,
       color: Colors.white,
       child: Container(
-        height: 60,
         padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,28 +40,49 @@ class IdramBottomNavigationBar extends StatelessWidget {
 
   Widget _buildNavItem({required int index, required IdramService item}) {
     final bool isSelected = currentIndex == index;
-    final Color color = isSelected
-        ? const Color(0xFFFF6B1A)
-        : const Color(0xFF4A4A4A);
 
     return Expanded(
       child: GestureDetector(
         onTap: () => onTap(index),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(item.iconData, color: color, size: 24),
-            const SizedBox(height: 4),
-            Text(
-              item.name,
-              style: TextStyle(
-                color: color,
-                fontSize: 10,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeInOut,
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedScale(
+                scale: isSelected ? 1.15 : 1.0,
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeInOut,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 250),
+                  child: Icon(
+                    item.iconData,
+                    key: ValueKey(isSelected),
+                    color: isSelected
+                        ? const Color(0xFFFF6B1A)
+                        : const Color(0xFF4A4A4A),
+                    size: 24,
+                  ),
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 4),
+              AnimatedDefaultTextStyle(
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeInOut,
+                style: TextStyle(
+                  color: isSelected
+                      ? const Color(0xFFFF6B1A)
+                      : const Color(0xFF4A4A4A),
+                  fontSize: 10,
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                ),
+                child: Text(item.name),
+              ),
+            ],
+          ),
         ),
       ),
     );

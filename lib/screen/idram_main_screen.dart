@@ -57,45 +57,47 @@ class _IdramMainScreenState extends State<IdramMainScreen>
       appBar: IdramAppbar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TopTabBar(
-              isAboutStories: true,
-              controller: _topTapBarcontroller,
-              tabs: IdramConstants.topTabs,
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                spacing: 15,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  for (int i = 1; i < _imageLength + 1; ++i)
-                    SlantedRectangle(
-                      imagePath: '${IdramConstants.imagePath}image$i.png',
-                    ),
-                ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TopTabBar(
+                isAboutStories: true,
+                controller: _topTapBarcontroller,
+                tabs: IdramConstants.topTabs,
               ),
-            ),
-            TopTabBar(
-              isAboutStories: false,
-              controller: _financeTapBarcontroller,
-              tabs: IdramConstants.financeTabs,
-            ),
-            const SizedBox(height: 23),
-            RocketLineAndWallet(),
-            const SizedBox(height: 40),
-            OptionTabBar(
-              tabs: IdramConstants.optionTabs,
-              controller: _optionTapBarcontroller,
-            ),
-            const SizedBox(height: 23),
-            ServiceTabBar(
-              controller: _serviceTapBarcontroller,
-              tabs: IdramConstants.serviceTabs,
-            ),
-          ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  spacing: 15,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for (int i = 1; i < _imageLength + 1; ++i)
+                      SlantedRectangle(
+                        imagePath: '${IdramConstants.imagePath}image$i.png',
+                      ),
+                  ],
+                ),
+              ),
+              TopTabBar(
+                isAboutStories: false,
+                controller: _financeTapBarcontroller,
+                tabs: IdramConstants.financeTabs,
+              ),
+              const SizedBox(height: 10),
+              RocketLineAndWallet(),
+              const SizedBox(height: 20),
+              OptionTabBar(
+                tabs: IdramConstants.optionTabs,
+                controller: _optionTapBarcontroller,
+              ),
+              const SizedBox(height: 10),
+              ServiceTabBar(
+                controller: _serviceTapBarcontroller,
+                tabs: IdramConstants.serviceTabs,
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -107,14 +109,10 @@ class _IdramMainScreenState extends State<IdramMainScreen>
           elevation: 4,
           shape: const CircleBorder(),
           onPressed: () async {
-            final result = await Navigator.push(
+            await Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => const ScannerScreen()),
             );
-
-            if (result != null) {
-              print('Scanned: $result');
-            }
           },
           child: Icon(
             IdramConstants.bottomNavigationBar[2].iconData,
