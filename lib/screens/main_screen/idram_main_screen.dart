@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:idram/screen/constants/idram_constants.dart';
-import 'package:idram/screen/scanner_screen.dart';
-import 'package:idram/screen/widgets/appbar.dart';
-import 'package:idram/screen/widgets/bottom_navigation_bar.dart';
-import 'package:idram/screen/widgets/images_card.dart';
-import 'package:idram/screen/widgets/rocket_line_and_wallet.dart';
-import 'package:idram/screen/widgets/option_tab_bar.dart';
-import 'package:idram/screen/widgets/service_tab_bar.dart';
-import 'package:idram/screen/widgets/top_tab_bar.dart';
+import 'package:idram/screens/main_screen/constants/idram_constants.dart';
+import 'package:idram/screens/main_screen/models/service_enum.dart';
+import 'package:idram/screens/scanner_screen.dart';
+import 'package:idram/screens/main_screen/widgets/appbar.dart';
+import 'package:idram/screens/main_screen/widgets/bottom_navigation_bar.dart';
+import 'package:idram/screens/main_screen/widgets/images_card.dart';
+import 'package:idram/screens/main_screen/widgets/rocket_line_and_wallet.dart';
+import 'package:idram/screens/main_screen/widgets/option_tab_bar.dart';
+import 'package:idram/screens/main_screen/widgets/service_tab_bar.dart';
+import 'package:idram/screens/main_screen/widgets/top_tab_bar.dart';
 
 class IdramMainScreen extends StatefulWidget {
   const IdramMainScreen({super.key});
@@ -20,6 +21,7 @@ class _IdramMainScreenState extends State<IdramMainScreen>
     with TickerProviderStateMixin {
   int _currentNavBarIndex = 0;
   final int _imageLength = 6;
+  ServiceEnum _currentService = ServiceEnum.all;
   late TabController _topTapBarcontroller;
   late TabController _financeTapBarcontroller;
   late TabController _optionTapBarcontroller;
@@ -27,12 +29,15 @@ class _IdramMainScreenState extends State<IdramMainScreen>
   @override
   void initState() {
     super.initState();
+    _initControllers();
+  }
+
+  void _initControllers() {
     _topTapBarcontroller = TabController(
       animationDuration: const Duration(milliseconds: 200),
       length: IdramConstants.topTabs.length,
       vsync: this,
     );
-    super.initState();
     _financeTapBarcontroller = TabController(
       animationDuration: const Duration(milliseconds: 200),
       length: IdramConstants.financeTabs.length,
@@ -45,9 +50,28 @@ class _IdramMainScreenState extends State<IdramMainScreen>
     );
     _serviceTapBarcontroller = TabController(
       animationDuration: const Duration(milliseconds: 200),
-      length: IdramConstants.serviceTabs.length,
+      length: IdramConstants.servicesMap[_currentService]!.length,
       vsync: this,
     );
+    _listenToControllers();
+  }
+
+  void _listenToControllers() {
+    _optionTapBarcontroller.addListener(() {
+      final servicesList = IdramConstants.servicesMap.keys.toList();
+      setState(() {
+        _currentService = servicesList[_optionTapBarcontroller.index];
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _topTapBarcontroller.dispose();
+    _financeTapBarcontroller.dispose();
+    _optionTapBarcontroller.dispose();
+    _serviceTapBarcontroller.dispose();
+    super.dispose();
   }
 
   @override
@@ -93,8 +117,9 @@ class _IdramMainScreenState extends State<IdramMainScreen>
               ),
               const SizedBox(height: 10),
               ServiceTabBar(
+                currentService: _currentService,
                 controller: _serviceTapBarcontroller,
-                tabs: IdramConstants.serviceTabs,
+                tabs: IdramConstants.servicesMap[_currentService]!,
               ),
             ],
           ),

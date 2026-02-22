@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:idram/screen/constants/idram_constants.dart';
-import 'package:idram/screen/models/service.dart';
+import 'package:idram/screens/main_screen/constants/idram_constants.dart';
+import 'package:idram/screens/main_screen/models/service.dart';
 
 class IdramBottomNavigationBar extends StatelessWidget {
   final int currentIndex;

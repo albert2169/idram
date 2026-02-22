@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:idram/screen/constants/idram_constants.dart';
+import 'package:idram/screens/main_screen/constants/idram_constants.dart';
 
 class RocketLineAndWallet extends StatelessWidget {
   const RocketLineAndWallet({super.key});

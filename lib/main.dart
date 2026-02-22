@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:idram/screen/idram_main_screen.dart';
+import 'package:idram/screens/main_screen/idram_main_screen.dart';
 
 void main() {
   runApp(const MyApp());
